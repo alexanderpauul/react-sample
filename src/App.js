@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { isEmpty, size } from "lodash";
 import shortid from "shortid";
-import { getCollection, addDocument, updateDocument, deleteDocument } from "./actions";
+import {
+  getCollection,
+  addDocument,
+  updateDocument,
+  deleteDocument,
+} from "./actions";
 
 function App() {
   const [task, setTask] = useState("");
