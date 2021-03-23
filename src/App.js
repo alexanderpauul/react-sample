@@ -1,7 +1,7 @@
-import { isEmpty, size } from "lodash";
 import React, { useState, useEffect } from "react";
+import { isEmpty, size } from "lodash";
 import shortid from "shortid";
-import { addDocument, getCollection } from "./actions";
+import { getCollection, addDocument, updateDocument, deleteDocument } from "./actions";
 
 function App() {
   const [task, setTask] = useState("");
@@ -47,21 +47,22 @@ function App() {
     setTask("");
   };
 
-  const deleteTask = (id) => {
-    const filteredTask = tasks.filter((task) => task.id !== id);
-    setTasks(filteredTask);
-  };
-
   const editTask = (parmTask) => {
     setTask(parmTask.name);
     setEditMode(true);
     setId(parmTask.id);
   };
 
-  const saveTask = (e) => {
+  const saveTask = async (e) => {
     e.preventDefault();
 
     if (!ValidateForm()) {
+      return;
+    }
+
+    const result = await updateDocument("tasks", id, { name: task });
+    if (!result.statusResponse) {
+      setError(result.error);
       return;
     }
 
@@ -73,6 +74,17 @@ function App() {
     setEditMode(false);
     setTask("");
     setId("");
+  };
+
+  const deleteTask = async (id) => {
+    const result = await deleteDocument("tasks", id);
+    if (!result.statusResponse) {
+      setError(result.error);
+      return;
+    }
+
+    const filteredTask = tasks.filter((task) => task.id !== id);
+    setTasks(filteredTask);
   };
 
   return (
