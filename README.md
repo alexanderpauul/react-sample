@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This project has been published in [Firebase - hosting](https://react-sample-9394f.web.app/) and [Netlify](https://elegant-bohr-3e03de.netlify.app/) 
 
 ## Available Scripts
 
